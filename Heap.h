@@ -56,12 +56,19 @@ public:
 // Default constructor
 template <class T>
 Heap<T>::Heap(void) {
+    capacity = DEFAULT_HEAP_CAPACITY;
+    size = 0;
+    array = new T[capacity];
     // ? How can i make sense for capacity here...? maybe 0?
-
 }
 
+// Copy constructor
+template <class T>
+Heap<T>::Heap (const Heap<T> &myarray){
 
+}
 // Other constructor that im lazy to implement now
+
 
 
 // Destructor
@@ -71,12 +78,20 @@ Heap<T>::~Heap(void) {
 }
 
 
-// 
+// Overloaded assignment operator
+template <typename T>
+List <T> List <T> :: operator= (const List<T> &myarray){
+    size  = myarray.size;
+    capacity = myarray.capacity; 
 
+    array = new T[capacity]; // allocate new memory
+    for (int i = 0; i < size; i++) 
+        array[i] = myarray.array[i]; // copy elements from myarray
 
+    delete[] array; // deallocate current memory
 
-
-
+    return *this;  // return a reference to this object
+}
 
 
 // ! Document
@@ -122,5 +137,45 @@ T Heap<T>::extract(void) {
     return maxElement;
 }
 
+template <class T>
+void Heap<T>::heapify(int index){
+T l = left(index);
+T r = right(index);
+
+if (l <= size && array[l] > array[index]){
+    largest = l;
+} else{
+    largest = index;
+}
+if (r <= size && array[r] > array[index]){
+    largest = r;
+}
+if (largest != index){
+    T temp = array[index];
+    array[index] = array[largest];
+    array[largest] = temp;
+}
+}
+
+template <class T>
+void Heap<T>::buildHeap(void){
+    for(int i = size/2; i > 1; i = i/2){
+        heapify(i);
+    }
+}
+
+template <class T>
+void Heap<T>::heapSort(void){
+    buildHeap();
+    for(int i = size; i > 2; i--){
+        T temp = array[1];
+        array[1] = array[i];
+        array[i] = temp;
+        size--;
+        heapify(1);
+    }
+}         
+
+void        increaseKey ( int index, T value );  
 
 #endif
