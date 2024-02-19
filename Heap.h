@@ -12,6 +12,9 @@ using namespace std;
 #ifndef HEAP_H
 #define HEAP_H
 
+// ? Can I do this?
+#define DEFAULT_HEAP_CAPACITY 10
+
 template <class T>
 class Heap
 {
@@ -25,10 +28,8 @@ private:
 public:
                 Heap        ( void );                   // Default constructor
                 Heap        ( const Heap& other );      // Copy constructor
-                // int parameter - idk what im reading
-                // array/size parameter constructor
-
-
+                Heap        ( int specified_capacity ); // Specified parameter constructor
+                Heap        ( int array[], int size);   // Array/size paramters constructor
                 ~Heap       ( void );                   // Destructor
     Heap&       operator=   ( const Heap& other );      // Assignment Operator overload
     void        heapify     ( int index );              
@@ -57,36 +58,53 @@ public:
 template <class T>
 Heap<T>::Heap(void) {
     capacity = DEFAULT_HEAP_CAPACITY;
-    size = 0;
     array = new T[capacity];
-    // ? How can i make sense for capacity here...? maybe 0?
+    size = 0;
 }
 
 // Copy constructor
 template <class T>
-Heap<T>::Heap (const Heap<T> &myarray){
-
+Heap<T>::Heap(const Heap<T> &other) {
+    capacity = other.capacity;
+    size = other.size;
+    heap = new T[capacity];
+    for (int i = 0; i < size; i++) {
+        heap[i] = other.heap[i];
+    }  
 }
-// Other constructor that im lazy to implement now
 
+// Int parameter constructor
+template <class T>
+Heap<T>::Heap(int specified_capacity) {
+    capacity = specified_capacity;
+    size = 0;
+    heap = new T[capacity];
+}
+
+// Array/Size Parameters
+template <class T>
+Heap<T>::Heap(int a[], int size) {
+    pass;
+}
 
 
 // Destructor
 template <class T>
 Heap<T>::~Heap(void) {
     delete[] array;     // Release the dynamically allocated array
+    size = 0;           // Reset the size of the heap
 }
 
 
 // Overloaded assignment operator
-template <typename T>
-List <T> List <T> :: operator= (const List<T> &myarray){
-    size  = myarray.size;
-    capacity = myarray.capacity; 
+template <class T>
+Heap& Heap<T>::operator=(const Heap& other) {
+    size  = other.size;
+    capacity = other.capacity; 
 
     array = new T[capacity]; // allocate new memory
     for (int i = 0; i < size; i++) 
-        array[i] = myarray.array[i]; // copy elements from myarray
+        array[i] = other.array[i]; // copy elements from myarray
 
     delete[] array; // deallocate current memory
 
@@ -176,6 +194,6 @@ void Heap<T>::heapSort(void){
     }
 }         
 
-void        increaseKey ( int index, T value );  
+//void        increaseKey ( int index, T value );  
 
 #endif
