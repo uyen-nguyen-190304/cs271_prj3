@@ -117,7 +117,7 @@ Heap<T>::Heap(const Heap<T> &other) {
     } 
 }
 
-
+// do we need this?
 //==========================================================================================
 // * Method name  : Heap (int parameter constructor)
 // * Purpose      : Create a new Heap object with a specified capacity
@@ -144,8 +144,9 @@ Heap<T>::Heap(int givenCapacity) {
 
 //==========================================================================================
 // * Method name  : Heap (array & size parameters constructor)
-// * Purpose      : Create a new Heap object with a specified capacity
-// * Parameters   : int givenCapacity (initial capacity for the heap, specified by the user)
+// * Purpose      : Create a new Heap object with a specified array and its size
+// * Parameters   : T a[] (an array with elements of type T)
+//                  int arraySize (size of the given array, specified by the user)
 // * Return Value : None
 //==========================================================================================
 template <class T>
@@ -189,7 +190,7 @@ Heap<T>::~Heap(void) {
 
 //==========================================================================================
 // * Method name  : operator= (overload assignment operator)
-// * Purpose      : Destroy the Heap object and release it allocated memory
+// * Purpose      : Copy a specified heap to our heap object
 // * Parameters   : const Heap& other (the heap object from which to copy)
 // * Return Value : Heap& (a reference to this heap object)
 //==========================================================================================
@@ -200,12 +201,12 @@ Heap<T>& Heap<T>::operator=(const Heap& other) {
         return *this;
     }
 
+    // Release the existing memory to prevent memory leaks before reallocating
+    delete[] heap;
+
     // Copy the size and capacity from the source object
     size  = other.size;
     capacity = other.capacity; 
-
-    // Release the existing memory to prevent memory leaks before reallocating
-    delete[] heap;
 
     // Allocate new memory for the heap array with the copied capacity
     heap = new T[capacity];
@@ -299,8 +300,9 @@ void Heap<T>::heapSort(void) {
 
 //==========================================================================================
 // * Method name  : increaseKey 
-// * Purpose      : Sort the elements in ascending order using heap sort algorithm
-// * Parameters   : None
+// * Purpose      : Set the node at the specified index to a given higher value and maintains the max-heap property
+// * Parameters   : int index (the index of the node to be updated)
+//                  T value (the value that will be assigned to the specified node)
 // * Return Value : None
 //==========================================================================================
 template <class T>
@@ -342,14 +344,14 @@ void Heap<T>::insert(T element) {
         resize();
     }
 
-    // Place thew new element at the next available position in the heap
-    // Set the element's value to one less than its actual value to ensure it can be increased and properly positioned through increaseKey
+    // Place the new element at the next available position in the heap
+    // Set the element's value to one less than its actual value to ensure it can be increased and properly positioned through increaseKey()
     heap[size] = element - 1; 
 
     // Increment the heap's size to account for the newly added element
     size++;
 
-    // Correctly position and set the new node to its intended value using increaseKey
+    // Correctly position and set the new node to its intended value using increaseKey()
     increaseKey(size, element);
 }
 
