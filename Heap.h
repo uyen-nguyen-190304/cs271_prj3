@@ -43,14 +43,14 @@ public:
     T           max         ( void ) const;             // Return the max element in the heap
     T           extract     ( void );                   // Remove and return the max element in the heap
 
-
-    // friend func - the correct version
-
-
-
+    friend ostream & operator<< (ostream &os, const Heap<T> &other) {
+        for (int i = 0; i < other.size - 1; i++) {
+            os << other.heap[i] << " ";
+        }
+        os << other.heap[other.size - 1];
+        return os;
+    }
     
-
-
 };
 
 // Resize Function
@@ -228,7 +228,10 @@ void Heap<T>::increaseKey ( int index, T value ){
 
 template <class T>
 void Heap<T>::insert (T element){
-
+    if(size == capacity){
+        
+    }
+    heap[size + 1] = heap[element]
 }
 
 #endif
