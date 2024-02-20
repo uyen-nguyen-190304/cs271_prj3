@@ -219,17 +219,20 @@ void Heap<T>::heapSort(void) {
 
 template <class T>
 void Heap<T>::increaseKey ( int index, T value ){
-    heap[index] = heap[index] + value;
-    for (int i = (index-1)/2; i >= 0; i = (i-1)/2){
-        heapify(i, size);
+    if  (value < heap[index]){
+        throw logic_error("New key is smaller than current key");
     }
-
+    heap[index] = value; 
+    while (index >= 0 && heap[(index - 1)/2] < heap[index]){
+        swap(heap[(index - 1)/2], heap[index]);
+        index = (index - 1)/2;
+    }
 }
 
 template <class T>
 void Heap<T>::insert (T element){
     if(size == capacity){
-        
+        resize();
     }
     heap[size + 1] = heap[element]
 }
