@@ -5,8 +5,6 @@
 // * Last Update  : 2024-02-20
 //==========================================================================================
 #include <iostream>
-#include <array>
-#include <string>
 #include <stdexcept> 
 using namespace std;
 
@@ -43,7 +41,7 @@ public:
     T           extract     ( void );                       // Remove and return the max element in the heap
 
     // Friend function - cout << operator overload
-    friend ostream & operator<< (ostream &os, const Heap<T> &other) {
+    friend ostream & operator<<(ostream &os, const Heap<T> &other) {
         for (int i = 0; i < other.size - 1; i++) {
             os << other.heap[i] << " ";
         }
