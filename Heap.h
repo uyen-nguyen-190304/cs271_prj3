@@ -206,7 +206,7 @@ if (largest != index){
 template <class T>
 void Heap<T>::buildHeap(void){
     for(int i = size/2; i >= 0; i--){
-        heapify(i);
+        heapify(i, size);
     }
 }
 
@@ -221,8 +221,12 @@ void Heap<T>::heapSort(void) {
     }
 }
 template <class T>
-void Heap<T> :: increaseKey ( int index, T value ){
-
+void Heap<T>::increaseKey ( int index, T value ){
+    heap[index] = heap[index] + value;
+    for (int i = (index-1)/2; i >= 0; i = (i-1)/2){
+        heapify(i, size);
+    }
+    
 }
 
 template <class T>
