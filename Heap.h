@@ -183,15 +183,15 @@ T Heap<T>::extract(void) {
 
 template <class T>
 void Heap<T>::heapify(int index, int size){
-T l = left(index);
-T r = right(index);
+T l = heap[index*2 + 1];
+T r = heap[index*2 + 2];
 
-if (l <= size && heap[l] > heap[index]){
+if (l <= size - 1 && heap[l] > heap[index]){
     largest = l;
 } else{
     largest = index;
 }
-if (r <= size && heap[r] > heap[largest]){
+if (r <= size - 1 && heap[r] > heap[largest]){
     largest = r;
 }
 if (largest != index){
@@ -220,7 +220,14 @@ void Heap<T>::heapSort(void) {
         heapify(0, i);  // Corrected index from 1 to 0
     }
 }
+template <class T>
+void Heap<T> :: increaseKey ( int index, T value ){
 
-//void        increaseKey ( int index, T value );  
+}
+
+template <class T>
+void Heap<T>::insert (T element){
+
+}
 
 #endif
