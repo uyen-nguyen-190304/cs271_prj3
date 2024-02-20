@@ -12,24 +12,23 @@ using namespace std;
 #ifndef HEAP_H
 #define HEAP_H
 
-// ? Can I do this?
-#define DEFAULT_HEAP_CAPACITY 10
+#define DEFAULT_HEAP_CAPACITY 100
 
 template <class T>
 class Heap
 {
 private:
-    T*      array;          // Dynamically allocated array for heap
+    T*      heap;          // Dynamically allocated array for heap
     int     capacity;       // Size of the array
     int     size;           // Current number of elements in the heap
 
-    void resize();          // Resize the array when full
+    void        resize      ( void );                   // Resize the array when full
 
 public:
                 Heap        ( void );                   // Default constructor
                 Heap        ( const Heap& other );      // Copy constructor
-                Heap        ( int specified_capacity ); // Specified parameter constructor
-                Heap        ( int array[], int size);   // Array/size paramters constructor
+                Heap        ( int givenCapacity ); // Specified parameter constructor
+                Heap        ( int array[], int arraySize);   // Array/size paramters constructor
                 ~Heap       ( void );                   // Destructor
     Heap&       operator=   ( const Heap& other );      // Assignment Operator overload
     void        heapify     ( int index );              
@@ -54,11 +53,27 @@ public:
 
 };
 
+// Resize Function
+template <class T>
+void Heap<T>::resize(void) {
+    T *newHeap;
+    newHeap = new T[capacity * 2];
+
+    for (int i = 0; i < size; i++) {
+        newHeap[i] = heap[i]; 
+    }
+    delete [] heap;
+
+    heap = newHeap;
+    capacity *= 2;
+}
+
+
 // Default constructor
 template <class T>
 Heap<T>::Heap(void) {
     capacity = DEFAULT_HEAP_CAPACITY;
-    array = new T[capacity];
+    heap = new T[capacity];
     size = 0;
 }
 
@@ -75,38 +90,49 @@ Heap<T>::Heap(const Heap<T> &other) {
 
 // Int parameter constructor
 template <class T>
-Heap<T>::Heap(int specified_capacity) {
-    capacity = specified_capacity;
-    size = 0;
+Heap<T>::Heap(int givenCapacity) {
+    capacity = givenCapacity;
     heap = new T[capacity];
+    size = 0;
 }
 
 // Array/Size Parameters
 template <class T>
-Heap<T>::Heap(int a[], int size) {
-    pass;
+Heap<T>::Heap(int a[], int arraySize) {
+    if (a == nullptr || arraySize <= 0) {
+        throw out_of_range("Invalid array or size.");
+    }
+
+    capacity = size = arraySize;
+    heap = new T[capacity];
+
+    for (int i = 0; i < size; i++) {
+        heap[i] = a[i];
+    }
+
+    buildHeap();
 }
 
 
 // Destructor
 template <class T>
 Heap<T>::~Heap(void) {
-    delete[] array;     // Release the dynamically allocated array
+    delete[] heap;     // Release the dynamically allocated array
     size = 0;           // Reset the size of the heap
 }
 
 
 // Overloaded assignment operator
 template <class T>
-Heap& Heap<T>::operator=(const Heap& other) {
+Heap<T>& Heap<T>::operator=(const Heap& other) {
     size  = other.size;
     capacity = other.capacity; 
 
-    array = new T[capacity]; // allocate new memory
+    delete[] heap;
+    heap = new T[capacity];
+    
     for (int i = 0; i < size; i++) 
-        array[i] = other.array[i]; // copy elements from myarray
-
-    delete[] array; // deallocate current memory
+        heap[i] = other.heap[i]; // copy elements from myarray
 
     return *this;  // return a reference to this object
 }
