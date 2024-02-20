@@ -1,11 +1,10 @@
 #include <iostream>
-#include <string>
-#include "Heap.h"
 #include <stdexcept>
-
+#include "Heap.h"
 using namespace std;
 
 int main() {
+    
     try {
         // Test default constructor
         Heap<int> h1;
