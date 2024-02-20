@@ -31,7 +31,7 @@ public:
                 Heap        ( int array[], int arraySize);   // Array/size paramters constructor
                 ~Heap       ( void );                   // Destructor
     Heap&       operator=   ( const Heap& other );      // Assignment Operator overload
-    void        heapify     ( int index );              
+    void        heapify     ( int index, int N );              
     void        buildHeap   ( void );                   // Build the heap from an unsorted array
     void        heapSort    ( void );                   // Sort an array using heap structure
     void        increaseKey ( int index, T value );     // Increase the value of an element of the heap
@@ -182,44 +182,41 @@ T Heap<T>::extract(void) {
 }
 
 template <class T>
-void Heap<T>::heapify(int index, int size){
-T l = heap[index*2 + 1];
-T r = heap[index*2 + 2];
+void Heap<T>::heapify(int index, int N) {
+    int largest = index;
+    int left = index * 2 + 1;
+    int right = index * 2 + 2;
 
-if (l <= size - 1 && heap[l] > heap[index]){
-    largest = l;
-} else{
-    largest = index;
+    if (left <= N - 1 && heap[left] > heap[index])
+        largest = left;
+    if (r <= N - 1 && heap[r] > heap[largest])
+        largest = r;
+    
+    if (largest != index) {
+        swap(heap[index], heap[largest]);
+        heapify(largest, N);        
+    }
 }
-if (r <= size - 1 && heap[r] > heap[largest]){
-    largest = r;
-}
-if (largest != index){
-    T temp = heap[index];
-    heap[index] = heap[largest];
-    heap[largest] = temp;
 
-    heapify(largest);
-}
-}
 
 template <class T>
 void Heap<T>::buildHeap(void){
-    for(int i = size/2; i >= 0; i--){
-        heapify(i);
+    for (int i = size / 2; i >= 0; i--) {
+        heapify(i, size);
     }
 }
+
 
 template <class T>
 void Heap<T>::heapSort(void) {
     buildHeap();
     for (int i = size - 1; i >= 1; i--) {
-        T temp = heap[0];  // Corrected index from 1 to 0
-        heap[0] = heap[i];
-        heap[i] = temp;
+        swap(heap[0], heap[i]);
         heapify(0, i);  // Corrected index from 1 to 0
     }
 }
+
+
 template <class T>
 void Heap<T> :: increaseKey ( int index, T value ){
 
