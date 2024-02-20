@@ -4,8 +4,56 @@
 using namespace std;
 
 int main() {
+    //========================================================
+    // I. Test method for int heap
+    cout << "I. Testing different methods for int heap" << endl;
+
+    //========================================================
+    // 1. Testing Default Constructor
+    cout << "1. Testing Default Constructor" << endl;
+
+    // Create a new empty integer heap
+    Heap<int> heapi1;                        // heapi1 = [ ]
+    cout << "heapi1 = " << heapi1 << endl;
+
+    //========================================================
+    // 2. Testing Copy Constructor
+    cout << "2. Testing Copy Constructor" << endl;
     
+    // a. Create a copy of an empty heap
+    cout << "a. Create a copy of an empty heap" << endl;
+    Heap<int> heapi2(heapi1);       // heapi2 = heapi1 = [ ]
+    cout << "heapi2 = " << heapi2 << endl;
+
+    // b. Create a copy of a nonempty list
+    cout << "b. Create a copy of a nonempty heap" << endl;
+    for (int i = 10; i >= 1; i--) 
+        heapi1.insert(i);           // heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    Heap<int> heapi3(heapi1);       // heapi3 = heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    cout << "heapi3 = " << heapi3 << endl;
+
+    //========================================================
+    // 3. Testing Int Parameter Constructor
+    cout << "3. Testing Int Parameter Constructor" << endl;
+
+    // a. Invalid Parameter
+    cout << "a. Invalid Parameter Passing" << endl;
     try {
+        Heap<int> heapi4(0);
+    } catch (...) {
+        cout << "0 is not a valid capacity for heap array." << endl;
+    }
+
+    // b. Valid Parameter 
+
+
+
+
+
+    return 0;
+}
+
+/*
         // Test default constructor
         Heap<int> h1;
         std::cout << "h1 = " << h1 << std::endl;
@@ -41,7 +89,4 @@ int main() {
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
-    }
-
-    return 0;
-}
+*/

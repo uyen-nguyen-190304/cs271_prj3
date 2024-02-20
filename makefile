@@ -11,7 +11,3 @@ main2: main2.o
 
 main2.o: main2.cpp PQueue.h
 	g++ -c main2.cpp
-
-# Clean target for cleaning up object files and executables
-clean:
-	rm -f *.o main1 main2

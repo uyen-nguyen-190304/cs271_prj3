@@ -42,6 +42,12 @@ public:
 
     // Friend function - cout << operator overload
     friend ostream & operator<<(ostream &os, const Heap<T> &other) {
+        // If the heap is empty, do nothing and return
+        if (other.size == 0) {
+            return os;
+        }
+        
+        // Else, print every element in the heap, separated by a space
         for (int i = 0; i < other.size - 1; i++) {
             os << other.heap[i] << " ";
         }
@@ -302,7 +308,7 @@ void Heap<T>::heapSort(void) {
 // * Method name  : increaseKey 
 // * Purpose      : Set the node at the specified index to a given higher value and maintains the max-heap property
 // * Parameters   : int index (the index of the node to be updated)
-//                  T value (the value that will be assigned to the specified node)
+// *                T value (the value that will be assigned to the specified node)
 // * Return Value : None
 //==========================================================================================
 template <class T>
@@ -348,11 +354,8 @@ void Heap<T>::insert(T element) {
     // Set the element's value to one less than its actual value to ensure it can be increased and properly positioned through increaseKey()
     heap[size] = element - 1; 
 
-    // Increment the heap's size to account for the newly added element
-    size++;
-
-    // Correctly position and set the new node to its intended value using increaseKey()
-    increaseKey(size, element);
+    // Correctly position and set the new node to its intended value using increaseKey(), then increase size to account for new element just added
+    increaseKey(size++, element);
 }
 
 
@@ -425,6 +428,5 @@ T Heap<T>::extract(void) {
     // Return the previously stored maximum element
     return maxElement;
 }
-
 
 #endif
