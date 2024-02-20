@@ -11,7 +11,7 @@ using namespace std;
 #ifndef HEAP_H
 #define HEAP_H
 
-#define DEFAULT_HEAP_CAPACITY 10
+#define DEFAULT_HEAP_CAPACITY 20
 
 template <class T>
 class Heap
@@ -128,7 +128,7 @@ template <class T>
 Heap<T>::Heap(int givenCapacity) {
     // Check if the given parameter is valid (givenCapacity > 0)
     if (givenCapacity <= 0) {
-        throw std::invalid_argument("Invalid capacity for heap array.")
+        throw std::invalid_argument("Invalid capacity for heap array.");
     }
     
     // Set the capacity to given value
