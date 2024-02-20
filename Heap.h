@@ -155,8 +155,8 @@ bool Heap<T>::empty(void) const {
 template <class T>
 T Heap<T>::max(void) const {
     if (size == 0) 
-        throw std::out_of_range("Heap is empty.")
-    return data[0];
+        throw std::out_of_range("Heap is empty.");
+    return heap[0];
 }
 
 
@@ -165,17 +165,17 @@ template <class T>
 T Heap<T>::extract(void) {
     // Check if the heap is valid for extract
     if (size == 0)
-        throw std::out_of_range("Heap is empty.")
+        throw std::out_of_range("Heap is empty.");
 
     // Create a new element to store the max value in heap
-    T maxElement = data[0];
+    T maxElement = heap[0];
 
     // Move the last element of the heap to root and decrease size
-    data[0] = data[size - 1];
+    heap[0] = heap[size - 1];
     size--;
 
     // Call Heapify at root to restore the max-heap property
-    heapify(0);
+    heapify(0, size);
 
     // Return the max element
     return maxElement;
@@ -189,8 +189,8 @@ void Heap<T>::heapify(int index, int N) {
 
     if (left <= N - 1 && heap[left] > heap[index])
         largest = left;
-    if (r <= N - 1 && heap[r] > heap[largest])
-        largest = r;
+    if (right <= N - 1 && heap[right] > heap[largest])
+        largest = right;
     
     if (largest != index) {
         swap(heap[index], heap[largest]);
@@ -218,7 +218,7 @@ void Heap<T>::heapSort(void) {
 
 
 template <class T>
-void Heap<T>::increaseKey ( int index, T value ){
+void Heap<T>::increaseKey (int index, T value){
     if  (value < heap[index]){
         throw logic_error("New key is smaller than current key");
     }
@@ -234,7 +234,10 @@ void Heap<T>::insert (T element){
     if(size == capacity){
         resize();
     }
-    heap[size + 1] = heap[element]
+    heap[size] = element - 1; 
+    size++;
+
+    increaseKey(size, element);
 }
 
 #endif
