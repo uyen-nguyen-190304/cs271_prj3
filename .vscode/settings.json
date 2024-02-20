@@ -9,6 +9,9 @@
         "initializer_list": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "ios": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     }
 }
