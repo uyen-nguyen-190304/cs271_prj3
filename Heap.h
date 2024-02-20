@@ -19,7 +19,7 @@ template <class T>
 class Heap
 {
 private:
-    T*      array;          // Dynamically allocated array for heap
+    T*      heap;          // Dynamically allocated array for heap
     int     capacity;       // Size of the array
     int     size;           // Current number of elements in the heap
 
@@ -58,7 +58,7 @@ public:
 template <class T>
 Heap<T>::Heap(void) {
     capacity = DEFAULT_HEAP_CAPACITY;
-    array = new T[capacity];
+    heap = new T[capacity];
     size = 0;
 }
 
@@ -91,7 +91,7 @@ Heap<T>::Heap(int a[], int size) {
 // Destructor
 template <class T>
 Heap<T>::~Heap(void) {
-    delete[] array;     // Release the dynamically allocated array
+    delete[] heap;     // Release the dynamically allocated array
     size = 0;           // Reset the size of the heap
 }
 
@@ -102,11 +102,11 @@ Heap& Heap<T>::operator=(const Heap& other) {
     size  = other.size;
     capacity = other.capacity; 
 
-    array = new T[capacity]; // allocate new memory
+    heap = new T[capacity]; // allocate new memory
     for (int i = 0; i < size; i++) 
-        array[i] = other.array[i]; // copy elements from myarray
+        heap[i] = other.heap[i]; // copy elements from myarray
 
-    delete[] array; // deallocate current memory
+    delete[] heap; // deallocate current memory
 
     return *this;  // return a reference to this object
 }
@@ -156,43 +156,44 @@ T Heap<T>::extract(void) {
 }
 
 template <class T>
-void Heap<T>::heapify(int index){
+void Heap<T>::heapify(int index, int size){
 T l = left(index);
 T r = right(index);
 
-if (l <= size && array[l] > array[index]){
+if (l <= size && heap[l] > heap[index]){
     largest = l;
 } else{
     largest = index;
 }
-if (r <= size && array[r] > array[index]){
+if (r <= size && heap[r] > heap[largest]){
     largest = r;
 }
 if (largest != index){
-    T temp = array[index];
-    array[index] = array[largest];
-    array[largest] = temp;
+    T temp = heap[index];
+    heap[index] = heap[largest];
+    heap[largest] = temp;
+
+    heapify(largest);
 }
 }
 
 template <class T>
 void Heap<T>::buildHeap(void){
-    for(int i = size/2; i > 1; i = i/2){
+    for(int i = size/2; i >= 0; i--){
         heapify(i);
     }
 }
 
 template <class T>
-void Heap<T>::heapSort(void){
+void Heap<T>::heapSort(void) {
     buildHeap();
-    for(int i = size; i > 2; i--){
-        T temp = array[1];
-        array[1] = array[i];
-        array[i] = temp;
-        size--;
-        heapify(1);
+    for (int i = size - 1; i >= 1; i--) {
+        T temp = heap[0];  // Corrected index from 1 to 0
+        heap[0] = heap[i];
+        heap[i] = temp;
+        heapify(0, i);  // Corrected index from 1 to 0
     }
-}         
+}
 
 //void        increaseKey ( int index, T value );  
 
