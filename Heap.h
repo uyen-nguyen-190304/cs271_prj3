@@ -123,7 +123,7 @@ Heap<T>::Heap(const Heap<T> &other) {
     } 
 }
 
-// do we need this?
+
 //==========================================================================================
 // * Method name  : Heap (int parameter constructor)
 // * Purpose      : Create a new Heap object with a specified capacity
@@ -152,7 +152,7 @@ Heap<T>::Heap(int givenCapacity) {
 // * Method name  : Heap (array & size parameters constructor)
 // * Purpose      : Create a new Heap object with a specified array and its size
 // * Parameters   : T a[] (an array with elements of type T)
-//                  int arraySize (size of the given array, specified by the user)
+// *                int arraySize (size of the given array, specified by the user)
 // * Return Value : None
 //==========================================================================================
 template <class T>
