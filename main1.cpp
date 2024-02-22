@@ -67,7 +67,7 @@ int main() {
     cout << "a. Invalid Parameter Passing" << endl;
     try {
         cout << "i. Passing an empty array" << endl;
-        int a[] = {};
+        int a[0];
         Heap<int> heapi5(a, 0);
     } catch (...) {
         cout << "An empty array is not a valid input" << endl;
@@ -75,22 +75,34 @@ int main() {
 
     try {
         cout << "ii. Passing 0 as the arraySize " << endl;
-        Heap<int> heapi5(-5);
+        int a[0];
+        Heap<int> heapi5(a, -5);
     } catch (...) {
         cout << "0 is not a valid array size" << endl;
     }
 
     try {
         cout << "iii. Passing a negative arraySize" << endl;
-        Heap<int> heapi5(-5);
+        int a[0];
+        Heap<int> heapi5(a, -5);
     } catch (...) {
         cout << "-5 is not a valid capacity for heap array." << endl;
     }
 
+    /*
+    try {
+        cout << "iii. Passing an array with its wrong size" << endl;
+        int a[5] = {1, 2, 3, 4, 5};
+        Heap<int> heapi5(a, 4);
+    } catch (...) {
+        cout << "Mismatch between length of array and arraySize" << endl;
+    }
+    */
+
     // b. Valid Parameter
     cout << "b. Valid Parameter Passing (a nonempty array with its size)" << endl;
-    int a[4] = {5, 6, 7, 8};
-    Heap<int> heapi5(a, 4);
+    int a[5] = {1, 2, 3, 4, 5};
+    Heap<int> heapi5(a, 5);
     cout << "heapi5 = " << heapi5 << endl;
 
     //========================================================
@@ -106,7 +118,7 @@ int main() {
     cout << "heapi6 = " << heapi6 << endl;
     heapi6 = heapi6; 
     cout << "heapi6 = heapi6 = " << heapi6 << endl;
-
+ 
     // b. Copy Assignment
     cout << "b. Copy Assignment" << endl;
     Heap<int> heapi7 = heapi6; 
@@ -115,8 +127,8 @@ int main() {
     // c. Empty to Non-Empty Assignment
     cout << "c. Empty to Non-Empty Assignment" << endl;
     Heap<int> heapi8;  // Empty heap
-    cout << "heapi6 = " << heapi8 << endl;
-    cout << " heapi8: " << heapi9 << endl;
+    cout << "heapi6 = " << heapi6 << endl;
+    cout << "heapi8 = " << heapi8 << endl;
     heapi6 = heapi8;
     cout << "heapi6 = heapi8 = " << heapi8 << endl;
 
@@ -125,71 +137,91 @@ int main() {
     heapi8 = heapi7;
     cout << "heapi8 = heapi7 = " << heapi8 << endl;
 
-
-    // e. Assignment with Different Types (compile-time check)
-    // Uncomment the following line to test, it should produce a compilation error
-    // Heap<double> heapDouble = heap1;
-
-    // f. Chaining Assignments
+    // e. Chaining Assignments
     cout << "f. Chaining Assignments" << endl;
-    Heap<int> heapi12, heapi13, heapi14;
-    // ... initialize heapi12 with some data
-    // ... initialize heapi13 with some data
-    // ... initialize heapi14 with some data
-    heapi14 = heapi13 = heapi12;
-    cout << "After assignment - heapi12: " << heapi12 << ", heapi13: " << heapi13 << ", heapi14: " << heapi14 << endl;
-
-    // g. Resize and Assign
-    cout << "g. Resize and Assign" << endl;
-    Heap<int> heapi15, heapi16;
-    // ... initialize heapi15 with some data
-    heapi16.resize(8);  // Resize heapi16 to a new size
-    heapi16 = heapi15;
-    cout << "After assignment - heapi15: " << heapi15 << ", heapi16: " << heapi16 << endl;
-
+    heapi6 = heapi7 = heapi8;
+    cout << "heapi6 = heapi7 = heapi8 " << endl;
+    cout << "heapi6 = " << heapi6 << endl;
+    cout << "heapi7 = " << heapi7 << endl;
+    cout << "heapi8 = " << heapi8 << endl;
 
     //========================================================
     // 7. Testing heapify()
+    cout << "7. Testing heapify()" << endl;
+
+     // a. Invalid Parameters
+    cout << "a. Invalid Parameters Passing" << endl;
+    try {
+        cout << "i. Passing a negative number as the index" << endl;
+        heapi6.heapify(-1,5);
+    } catch (...) {
+        cout << "-1 is not a vaid index" << endl;
+    }
+
+    try {
+        cout << "ii. Passing size of the sub-heap to be heapified > size of the whole heap" << endl;
+        heapi6.heapify(2,6);
+    } catch (...) {
+        cout << "The size sub-heap to be heapified is larger than size of the whole heap" << endl;
+    }
+
+    try {
+        cout << "iii. Passing the index of the node to be heapified >= size of the heap to be heapified" << endl;
+        heapi6.heapify(6,5);
+    } catch (...) {
+        cout << "The index of the node to be heapified is at least size of the heap to be heapified" << endl;
+    }
+
+    // b. Valid Parameter
+    cout << "b. Valid Parameter Passing (valid index and size of the heap)" << endl;
+    heapi6.heapSort();
+    cout << "heapi6 after sorted = " << heapi6 << endl;
+    heapi6.heapify(0, 5);
+    cout << "heapi6 after calling heapify() at index 0 = " << heapi6 << endl;
+    heapi6.heapify(1, 5);
+    cout << "heapi6 after calling heapify() at index 1 = " << heapi6 << endl;
 
     //========================================================
     // 8. Testing buildHeap()
+    cout << "8. Testing buildHeap()" << endl;
+
+    // Build heap with an already sorted heap
+    cout << "a. Build heap with a valid heap" << endl;
+    cout << "heapi7 = " << heapi7 << endl;
+    heapi7.buildHeap();
+    cout << "heapi7 = " << heapi7 << endl;
+    
+    // Build heap with a reverse sorted heap
+    cout << "b. Build heap with a reverse sorted heap" << endl;
+    heapi7.heapSort();
+    cout << "sorted heapi7 = " << heapi7 << endl;
+    heapi7.buildHeap();
+    cout << "heapi7 = " << heapi7 << endl;
+
+    // Build heap with an randomly sorted heap
+    cout << "c. Build heap with a randomly ordered heap" << endl;
+    cout << "heapi6 = " << heapi6 << endl;
+    heapi6.buildHeap();
+    cout << "heapi6 = " << heapi6 << endl;
+    
+    //========================================================
+    // 9. Testing heapSort()
+    cout << "9. Testing heapSort()" << endl;
+
+    // Heap sort with a valid heap
+    cout << "a. Sort a valid heap" << endl;
+    cout << "heapi6 = " << heapi6 << endl;
+    heapi6.heapSort();
+    cout << "heapi6 = " << heapi6 << endl;
+
+    // Heap sort with an randomly sorted heap
+    cout << "b. Sort a randomly ordered heap" << endl;
+    heapi6.heapSort();
+    heapi6.heapify(0, 5);
+    cout << "heapi6 = " << heapi6 << endl;
+    heapi6.heapSort();
+    cout << "heapi6 = " << heapi6 << endl;
     return 0;
+
 }
 
-/*
-        // Test default constructor
-        Heap<int> h1;
-        std::cout << "h1 = " << h1 << std::endl;
-
-        // Test constructor with array and size parameters
-        int arr[] = {3, 1, 4, 1, 5, 9, 2, 6, 5};
-        int arrSize = sizeof(arr) / sizeof(arr[0]);
-        Heap<int> h2(arr, arrSize);
-        std::cout << "h2 = " << h2 << std::endl;
-
-        // Test copy constructor
-        Heap<int> h3 = h2;
-        std::cout << "h3 = " << h3 << std::endl;
-
-        // Test heapify and buildHeap
-        h2.heapify(0, 9);
-        std::cout << "h2 after heapify = " << h2 << std::endl;
-        h3.buildHeap();
-        std::cout << "h3 after buildHeap = " << h3 << std::endl;
-
-        // Test increaseKey and insert
-        h3.increaseKey(4, 10);
-        std::cout << "h3 after increaseKey = " << h3 << std::endl;
-        h3.insert(7);
-        std::cout << "h3 after insert = " << h3 << std::endl;
-
-        // Test length, empty, max, and extract
-        std::cout << "Length of h3: " << h3.length() << std::endl;
-        std::cout << "Is h3 empty? " << (h3.empty() ? "Yes" : "No") << std::endl;
-        std::cout << "Max item in h3: " << h3.max() << std::endl;
-        std::cout << "Extracted max item from h3: " << h3.extract() << std::endl;
-        std::cout << "h3 after extraction = " << h3 << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-*/
