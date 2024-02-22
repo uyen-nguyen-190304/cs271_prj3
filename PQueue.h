@@ -2,7 +2,7 @@
 // * Author       : Yen Nguyen, Uyen Nguyen
 // * Purpose      : Implementing Priority Queue using Heap class as private member
 // * Date Created : 2024-02-13
-// * Last Update  : 2024-02-21
+// * Last Update  : 2024-02-22
 //==========================================================================================
 #include <iostream>
 #include <stdexcept>
@@ -18,16 +18,17 @@ private:
     Heap<T> heap;
 
 public:
-    PQueue();
-    PQueue(const PQueue& other);
-    PQueue(T a[], int size);
-    ~PQueue();
-    PQueue& operator=(const PQueue& other);
-    void enqueue(T item);
-    int length() const;
-    bool empty() const;
-    T peek() const;
-    T dequeue();
+                PQueue      ( void );
+                PQueue      ( const PQueue& other );
+                PQueue      ( T a[], int size );
+                ~PQueue     ( void );
+    PQueue&     operator=   ( const PQueue& other );
+    void        enqueue     ( T item );
+    int         length      ( void ) const;
+    bool        empty       ( void ) const;
+    T           peek        ( void ) const;
+    T           dequeue     ( void );
+
 
     // Friend function for cout << operator overload
     friend ostream& operator<<(ostream& os, const PQueue<T>& pq) {
@@ -93,7 +94,7 @@ T PQueue<T>::peek() const {
 template <class T>
 T PQueue<T>::dequeue() {
     if (empty()) {
-        throw std::out_of_range("Priority Queue is empty.");
+        throw std::out_of_range("Priority Queue is empty");
     }
     return heap.extract();
 }

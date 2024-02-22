@@ -5,6 +5,7 @@
 // * Last Update  : 2024-02-20
 //==========================================================================================
 #include <iostream>
+#include <algorithm>
 #include <stdexcept> 
 using namespace std;
 
@@ -161,12 +162,7 @@ Heap<T>::Heap(T a[], int arraySize) {
     if (a == nullptr || arraySize <= 0) {
         throw std::invalid_argument("Invalid array or size.");
     }
-/*
-     Mismatch parameters catch
-    if (sizeof(*a) / sizeof(T) != arraySize) {
-        throw std::invalid_argument("Mismatch between length of array and arraySize.");
-    }
-*/   
+
     // Initialized the heap's capacity and size with the size of the provided array
     capacity = size = arraySize;
 

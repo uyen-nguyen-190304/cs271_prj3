@@ -5,37 +5,47 @@ using namespace std;
 
 int main() {
     //========================================================
-    // I. Test method for int heap
-    cout << "*********************************************************************" << endl;
-    cout << "I. Testing different methods for int heap" << endl;
-    
-
-    //========================================================
     // 1. Testing Default Constructor
+    cout << "**********************************************************" << endl;
     cout << "1. Testing Default Constructor" << endl;
 
     // Create a new empty integer heap
     Heap<int> heapi1;                        // heapi1 = [ ]
-    cout << "heapi1 = " << heapi1 << endl;
+    cout << "Int Heap: heapi1 = " << heapi1 << endl;
+
+    Heap<float> heapf1;                      // heapf1 = [ ]
+    cout << "Float Heap: heapf1 = " << heapf1 << endl;
+
 
     //========================================================
     // 2. Testing Copy Constructor
+    cout << "**********************************************************" << endl;
     cout << "2. Testing Copy Constructor" << endl;
     
     // a. Create a copy of an empty heap
     cout << "a. Create a copy of an empty heap" << endl;
-    Heap<int> heapi2(heapi1);       // heapi2 = heapi1 = [ ]
-    cout << "heapi2 = " << heapi2 << endl;
+    Heap<int> heapi2(heapi1);         // heapi2 = heapi1 = [ ]
+    cout << "Int Heap: heapi2 = " << heapi2 << endl;
+
+    Heap<float> heapf2(heapf1);       // heapf2 = heapf1 = [ ]
+    cout << "Float Heap: heapf2 = " << heapf2 << endl;
 
     // b. Create a copy of a nonempty list
     cout << "b. Create a copy of a nonempty heap" << endl;
     for (int i = 10; i >= 1; i--) 
-        heapi1.insert(i);           // heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    Heap<int> heapi3(heapi1);       // heapi3 = heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    cout << "heapi3 = " << heapi3 << endl;
+        heapi1.insert(i);             // heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    Heap<int> heapi3(heapi1);         // heapi3 = heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    cout << "Int Heap: heapi3 = " << heapi3 << endl;
+    
+    for (int i = 10; i >= 5; i--)
+        heapf1.insert(i + 0.1*(i-1)); // heapf1 = [10.9, 9.8, 8.7, 7.6, 6.5, 5.4]
+    Heap<float> heapf3(heapf1);       // heapf3 = heapf1 = [10.9, 9.8, 8.7, 7.6, 6.5, 5.4]
+    cout << "Float Heap: heapf3 = " << heapf3 << endl;
+    
 
     //========================================================
     // 3. Testing Int Parameter Constructor
+    cout << "**********************************************************" << endl;
     cout << "3. Testing Int Parameter Constructor" << endl;
 
     // a. Invalid Parameter
@@ -46,6 +56,7 @@ int main() {
     } catch (...) {
         cout << "0 is not a valid capacity for heap array." << endl;
     }
+
 
     try {
         cout << "ii. Passing negative number as capacity parameter" << endl;
@@ -223,5 +234,37 @@ int main() {
     cout << "heapi6 = " << heapi6 << endl;
     return 0;
 
+    //========================================================
+    // 10. Testing increaseKey
+    /*
+    cout << "10. Testing increaseKey" << endl;
+
+    int a[5] = {5, 4, 3, 2, 1};
+    Heap<int> heapi1(a, 5);
+    // a. Invalid Parameter
+    cout << "a. Invalid Parameter Passing" << endl;
+    
+    try {
+        cout << "i. Passing negative index" << endl;
+        heapi1.increaseKey(-5, 23);
+    } catch (...) {
+        cout << "heapi1.increaseKey(-5, 23): -5 is not a valid index value." << endl;
+    }
+
+    try {
+        cout << "ii. Passing index larger than actual heap size" << endl;
+        heapi1.increaseKey(8, 17);
+    } catch (...) {
+        cout << "heapi1.increaseKey(8, 17): index 8 is out of heap bound." << endl;
+    }
+
+    // b. Set the node at a given index by smaller value
+    cout << "b. Set node by smaller value" << endl;
+    try {
+        heapi1.increaseKey(2, -10);
+    } catch (...) {
+        cout << "heapi1.increaseKey(2, -10): New key (10) is smaller than current key (3) at index 2." << endl; 
+    }
+    */
 }
 
