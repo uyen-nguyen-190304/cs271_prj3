@@ -162,6 +162,11 @@ Heap<T>::Heap(T a[], int arraySize) {
         throw std::invalid_argument("Invalid array or size.");
     }
 
+    // Mismatch parameters catch
+    if (sizeof(a) / sizeof(a[0]) != arraySize) {
+        throw std::invalid_argument("Mismatch between length of array and arraySize.");
+    }
+    
     // Initialized the heap's capacity and size with the size of the provided array
     capacity = size = arraySize;
 
@@ -319,7 +324,7 @@ void Heap<T>::increaseKey(int index, T value) {
     }
 
     // Check if the new value is smaller than the current value at the index. If so, throw an exception
-    if  (value < heap[index]){
+    if  (value < heap[index]) {
         throw std::logic_error("New key is smaller than current key");
     }
 
@@ -419,11 +424,12 @@ T Heap<T>::extract(void) {
     T maxElement = heap[0];
 
     // Move the last element of the heap to root and decrease size
-    heap[0] = heap[size - 1];
+    heap[0] = heap[size- 1];
     size--;
 
-    // Call Heapify at root to restore the max-heap property
-    heapify(0, size);
+    // Call Heapify at root to restore the max-heap property if the heap now is not empty 
+    if (size != 0)
+        heapify(0, size);
 
     // Return the previously stored maximum element
     return maxElement;
