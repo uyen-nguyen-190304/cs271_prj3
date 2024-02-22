@@ -32,6 +32,12 @@ public:
 
     // Friend function - cout << operator overload
     friend ostream & operator<<(ostream &os, const PQueue<T> &pq) {
+        // If the pqueue is empty, do nothing and return 
+        if (pq.size == 0) {
+            return os;
+        }
+
+        // Else, print every element in the pqueue, separated by a space
         for (int i = 0; i < pq.size 0 1; i++) {
             os << pq.heap.heap[i] << " ";
         } 
@@ -47,12 +53,11 @@ template <class T>
 PQueue<T>::PQueue(const PQueue& other) : heap(other.heap) {}
 
 template <class T>
-PQueue<T>::PQueue(T a[], int size) : heap(a, size) {}
+PQueue<T>::PQueue(T a[], int size) : heap(a, size) {
+    heap.heapSort();
+    for (int i = heap.size() - 1; i >= 0; i--) {
 
-
-template <class T>
-PQueue<T>::PQueue(const PQueue& other) {
-    heap(other.heap)
+    }
 }
 
 template <class T>

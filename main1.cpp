@@ -6,7 +6,9 @@ using namespace std;
 int main() {
     //========================================================
     // I. Test method for int heap
+    cout << "*********************************************************************" << endl;
     cout << "I. Testing different methods for int heap" << endl;
+    
 
     //========================================================
     // 1. Testing Default Constructor
@@ -39,12 +41,26 @@ int main() {
     // a. Invalid Parameter
     cout << "a. Invalid Parameter Passing" << endl;
     try {
+        cout << "i. Passing 0 as capacity parameter" << endl;
         Heap<int> heapi4(0);
     } catch (...) {
         cout << "0 is not a valid capacity for heap array." << endl;
     }
 
+    try {
+        cout << "ii. Passing negative number as capacity parameter" << endl;
+        Heap<int> heapi4(-5);
+    } catch (...) {
+        cout << "-5 is not a valid capacity for heap array." << endl;
+    }
+
     // b. Valid Parameter 
+    cout << "b. Valid Parameter Passing" << endl;
+    Heap<int> heapi4(10);
+    cout << "heapi4 = " << heapi4 << endl;
+
+    //========================================================
+    // 4. Testing Int Parameter Constructor   
 
 
 
