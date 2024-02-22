@@ -66,6 +66,57 @@ int main() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //========================================================
+    // 10. Testing increaseKey
+    cout << "10. Testing increaseKey" << endl;
+
+    int a[5] = {5, 4, 3, 2, 1};
+    Heap<int> heapi1(a, 5);
+    // a. Invalid Parameter
+    cout << "a. Invalid Parameter Passing" << endl;
+    
+    try {
+        cout << "i. Passing negative index" << endl;
+        heapi1.increaseKey(-5, 23);
+    } catch (...) {
+        cout << "heapi1.increaseKey(-5, 23): -5 is not a valid index value." << endl;
+    }
+
+    try {
+        cout << "ii. Passing index larger than actual heap size" << endl;
+        heapi1.increaseKey(8, 17);
+    } catch (...) {
+        cout << "heapi1.increaseKey(8, 17): index 8 is out of heap bound." << endl;
+    }
+
+    // b. Set the node at a given index by smaller value
+    cout << "b. Set node by smaller value" << endl;
+    try {
+        heapi1.increaseKey(2, -10);
+    } catch (...) {
+        cout << "heapi1.increaseKey(2, -10): New key (10) is smaller than current key (3) at index 2." << endl; 
+    }
+
+    
+    
+
+
     return 0;
 }
 
