@@ -30,7 +30,7 @@ public:
                 Heap        ( T array[], int arraySize );   // Array & size paramters constructor
                 ~Heap       ( void );                       // Destructor
     Heap&       operator=   ( const Heap& other );          // Assignment Operator overload
-    void        heapify     ( int index, int N );           // Maintain heap-max property   
+    void        heapify     ( int index, int N = size );           // Maintain heap-max property   
     void        buildHeap   ( void );                       // Build the heap from an unsorted array
     void        heapSort    ( void );                       // Sort an array using heap structure
     void        increaseKey ( int index, T value );         // Increase the value of an element of the heap
@@ -235,7 +235,7 @@ Heap<T>& Heap<T>::operator=(const Heap& other) {
 // * Return Value : None
 //==========================================================================================
 template <class T>
-void Heap<T>::heapify(int index, int N) {
+void Heap<T>::heapify(int index, int N = size) {
     // Validate input parameters to ensure they are within valid range 
     if (index < 0 || N > size || index >= N) {
         throw std::invalid_argument("Invalid index or N out of bounds.");
@@ -277,7 +277,7 @@ void Heap<T>::buildHeap(void) {
     // Heapify from the last non-leaf node all the way up to the root node
     for (int i = (size / 2) - 1; i >= 0; i--) {
         // Apply heapify to each non-leaf node to ensure the subtree rooted at 'i' satisfied max-heap property
-        heapify(i, size);
+        heapify(i);
     }
 }
 
