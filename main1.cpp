@@ -55,17 +55,104 @@ int main() {
     }
 
     // b. Valid Parameter 
-    cout << "b. Valid Parameter Passing" << endl;
+    cout << "b. Valid Parameter Passing (a positive integer as capacity parameter)" << endl;
     Heap<int> heapi4(10);
     cout << "heapi4 = " << heapi4 << endl;
 
     //========================================================
-    // 4. Testing Int Parameter Constructor   
+    // 4. Testing Array/Size Parameters Constructor
+    cout << "4. Testing Array/Size Parameters Constructor" << endl;
+
+    // a. Invalid Parameter
+    cout << "a. Invalid Parameter Passing" << endl;
+    try {
+        cout << "i. Passing an empty array" << endl;
+        int a[] = {};
+        Heap<int> heapi5(a, 0);
+    } catch (...) {
+        cout << "An empty array is not a valid input" << endl;
+    }
+
+    try {
+        cout << "ii. Passing 0 as the arraySize " << endl;
+        Heap<int> heapi5(-5);
+    } catch (...) {
+        cout << "0 is not a valid array size" << endl;
+    }
+
+    try {
+        cout << "iii. Passing a negative arraySize" << endl;
+        Heap<int> heapi5(-5);
+    } catch (...) {
+        cout << "-5 is not a valid capacity for heap array." << endl;
+    }
+
+    // b. Valid Parameter
+    cout << "b. Valid Parameter Passing (a nonempty array with its size)" << endl;
+    int a[4] = {5, 6, 7, 8};
+    Heap<int> heapi5(a, 4);
+    cout << "heapi5 = " << heapi5 << endl;
+
+    //========================================================
+    // 5. Testing destructor
+
+    //========================================================
+    // 6. Testing Assignment Operator
+    cout << "6. Testing Assignment Operator" << endl;
+    // a. Self Assignment
+    cout << "a. Self Assignment" << endl;
+    int b[5] = {10, 9, 7, 6, 5};
+    Heap<int> heapi6(b, 5);
+    cout << "heapi6 = " << heapi6 << endl;
+    heapi6 = heapi6; 
+    cout << "heapi6 = heapi6 = " << heapi6 << endl;
+
+    // b. Copy Assignment
+    cout << "b. Copy Assignment" << endl;
+    Heap<int> heapi7 = heapi6; 
+    cout << "heapi7 = heapi6 = " << heapi7 << endl;
+
+    // c. Empty to Non-Empty Assignment
+    cout << "c. Empty to Non-Empty Assignment" << endl;
+    Heap<int> heapi8;  // Empty heap
+    cout << "heapi6 = " << heapi8 << endl;
+    cout << " heapi8: " << heapi9 << endl;
+    heapi6 = heapi8;
+    cout << "heapi6 = heapi8 = " << heapi8 << endl;
+
+    // d. Non-Empty to Empty Assignment
+    cout << "d. Non-Empty to Empty Assignment" << endl;
+    heapi8 = heapi7;
+    cout << "heapi8 = heapi7 = " << heapi8 << endl;
 
 
+    // e. Assignment with Different Types (compile-time check)
+    // Uncomment the following line to test, it should produce a compilation error
+    // Heap<double> heapDouble = heap1;
+
+    // f. Chaining Assignments
+    cout << "f. Chaining Assignments" << endl;
+    Heap<int> heapi12, heapi13, heapi14;
+    // ... initialize heapi12 with some data
+    // ... initialize heapi13 with some data
+    // ... initialize heapi14 with some data
+    heapi14 = heapi13 = heapi12;
+    cout << "After assignment - heapi12: " << heapi12 << ", heapi13: " << heapi13 << ", heapi14: " << heapi14 << endl;
+
+    // g. Resize and Assign
+    cout << "g. Resize and Assign" << endl;
+    Heap<int> heapi15, heapi16;
+    // ... initialize heapi15 with some data
+    heapi16.resize(8);  // Resize heapi16 to a new size
+    heapi16 = heapi15;
+    cout << "After assignment - heapi15: " << heapi15 << ", heapi16: " << heapi16 << endl;
 
 
+    //========================================================
+    // 7. Testing heapify()
 
+    //========================================================
+    // 8. Testing buildHeap()
     return 0;
 }
 
