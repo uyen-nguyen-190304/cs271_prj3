@@ -73,7 +73,7 @@ PQueue<T>& PQueue<T>::operator=(const PQueue& other) {
 
 template <class T>
 void PQueue<T>::enqueue(T item) {
-
+    heap.insert(item);
 }
 
 template <class T>
@@ -101,18 +101,8 @@ T PQueue<T>::dequeue(void) {
     if (empty()) {
         throw std::out_of_range("Priority Queue is empty.");
     }
-    T firstItem = heap.extract();
 
-    PQueue<T> temp = this;
-    temp.heapSort();
-
-    ~this;
-    PQueue<T> this(temp.length());
-
-    for (int i = this.length() - 1; i >= 0; i--) {
-        this.insert(temp[i]);
-    }
-    return firstItem;
+    return heap.extract();
 }
 
 #endif
