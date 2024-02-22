@@ -23,7 +23,7 @@ public:
                 PQueue      ( const PQueue& other );
                 PQueue      ( T a[], int size );
                 ~PQueue     ( void );
-    PQueue&     operator=   ( const Heap& other );
+    PQueue&     operator=   ( const PQueue& other );
     void        enqueue     ( T item );
     int         length      ( void ) const;
     bool        empty       ( void ) const;
@@ -33,15 +33,15 @@ public:
     // Friend function - cout << operator overload
     friend ostream & operator<<(ostream &os, const PQueue<T> &pq) {
         // If the pqueue is empty, do nothing and return 
-        if (pq.size == 0) {
+        if (pq.empty()) {
             return os;
         }
 
         // Else, print every element in the pqueue, separated by a space
-        for (int i = 0; i < pq.size 0 1; i++) {
-            os << pq.heap.heap[i] << " ";
+        for (int i = 0; i < pq.heap.length() - 1; i++) {
+            os << pq.heap[i] << " ";
         } 
-        os << pq.heap.heap[pq.heap.size - 1];
+        os << pq.heap[pq.heap.length() - 1];
         return os;
     }
 };
@@ -53,11 +53,22 @@ template <class T>
 PQueue<T>::PQueue(const PQueue& other) : heap(other.heap) {}
 
 template <class T>
-PQueue<T>::PQueue(T a[], int size) : heap(a, size) {
+PQueue<T>::PQueue(T a[], int size) : heap(size) {
     heap.heapSort();
-    for (int i = heap.size() - 1; i >= 0; i--) {
-
+    for (int i = heap.length() - 1; i >= 0; i--) {
+        heap.insert(a[i]);
     }
+}
+
+template <class T>
+PQueue<T>::~PQueue(void) {}
+
+template <class T>
+PQueue<T>& PQueue<T>::operator=(const PQueue& other) {
+    if (this != other) {
+        this->heap = other.heap;
+    }
+    return *this;
 }
 
 template <class T>
@@ -85,15 +96,23 @@ T PQueue<T>::peek(void) const {
     return heap.max();
 }
 
-
 template <class T>
 T PQueue<T>::dequeue(void) {
     if (empty()) {
         throw std::out_of_range("Priority Queue is empty.");
     }
+    T firstItem = heap.extract();
 
-    return heap.extract();
+    PQueue<T> temp = this;
+    temp.heapSort();
+
+    ~this;
+    PQueue<T> this(temp.length());
+
+    for (int i = this.length() - 1; i >= 0; i--) {
+        this.insert(temp[i]);
+    }
+    return firstItem;
 }
-
 
 #endif
