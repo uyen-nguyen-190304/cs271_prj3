@@ -94,8 +94,8 @@ int main() {
     Heap<int> heapi4(10);                       // heapi4 = [ ]
     cout << "- Heap<int> heapi4(10): heapi4 = " << heapi4 << endl;
 
-    Heap<int> heapf4(15);                       // heapf4 = [ ]
-    cout << "- Heap<int> heapf4(15): heapf4 = " << heapf4 << endl << endl;
+    Heap<float> heapf4(15);                       // heapf4 = [ ]
+    cout << "- Heap<float> heapf4(15): heapf4 = " << heapf4 << endl << endl;
 
 
     //========================================================
@@ -428,40 +428,214 @@ int main() {
     // 10. Testing increaseKey
     cout << "**********************************************************" << endl;
     cout << "10. Testing increaseKey" << endl;
-    
-    int a[5] = {5, 4, 3, 2, 1};
-    Heap<int> heapi1(a, 5);
+
     // a. Invalid Parameter
     cout << "a. Invalid Parameter Passing" << endl;
     
+    // i. Passing negative index
     try {
         cout << "i. Passing negative index" << endl;
-        heapi1.increaseKey(-5, 23);
+        heapi7.increaseKey(-5, 23);
+        cout << "- heapi7.increaseKey(-5, 23): heapi7 = " << heapi7 << endl;
     } catch (...) {
-        cout << "heapi1.increaseKey(-5, 23): -5 is not a valid index value." << endl;
+        cout << "- heapi7.increaseKey(-5, 23): Exception caught (-5 is not a valid index value)" << endl;
     }
 
     try {
-        cout << "ii. Passing index larger than actual heap size" << endl;
-        heapi1.increaseKey(8, 17);
+        heapf7.increaseKey(-10, 29.8);
+        cout << "- heapf7.increaseKey(-10, 29.8): heapf7 = " << heapf7 << endl;
     } catch (...) {
-        cout << "heapi1.increaseKey(8, 17): index 8 is out of heap bound." << endl;
+        cout << "- heapf7.increaseKey(-10, 29.8): Exception caught (-10 is not a valid index value)" << endl;
+    }
+
+    // ii. Passing index larger than actual heap size"
+    try {
+        cout << "ii. Passing index larger than actual heap size" << endl;
+        heapi7.increaseKey(8, 17);                      // heapi7 = [10, 9, 7, 6, 5]
+        cout << "- heapi7.increaseKey(8, 17): heapi7 = " << heapi7 << endl; 
+    } catch (...) {
+        cout << "- heapi7.increaseKey(8, 17): Exception caught (index 8 is out of heap bound)" << endl;
+    }
+
+    try {
+        heapf7.increaseKey(15, 9.8);                    // heapf7 = [9.4, 5.9, 7.5, 3.7, 1.8, 6.4, 4.9, 2.9]
+        cout << "- heapf7.increaseKey(15, 9.8): heapf7 = " << heapf7 << endl;
+    } catch (...) {
+        cout << "- heapf7.increaseKey(15, 9.8): Exception caught (index 15 is out of heap bound)" << endl;
     }
 
     // b. Set the node at a given index by smaller value
     cout << "b. Set node by smaller value" << endl;
     try {
-        heapi1.increaseKey(2, -10);
+        heapi7.increaseKey(3, 5);                       
+        cout << "- heapi7.increaseKey(3, 5): heapi7 = " << heapi7 << endl;
     } catch (...) {
-        cout << "heapi1.increaseKey(2, -10): New key (10) is smaller than current key (3) at index 2." << endl; 
+        cout << "- heapi7.increaseKey(3, 5): New key (5) is smaller than current key (6) at index 3" << endl; 
     }
 
+    try {
+        heapf7.increaseKey(5, 6.3);
+        cout << "- heapf7.increaseKey(5, 6.3): heapf7 = " << heapf7 << endl;
+    } catch (...) {
+        cout << "- heapf7.increaseKey(5, 6.3): New key (6.3) is smaller than the current key (6.4) at index 5" << endl;
+    }
+
+    // c. Increase valid value at valid node index
+    cout << "c. Increase valid value at valid node index" << endl;
+
+    // i. increaseKey with value equal to current value
+    cout << "i. increaseKey with value equal to current value" << endl;
+    heapi7.increaseKey(0, 10);                             // heapi7 = [10, 9, 7, 6, 5]
+    cout << "- heapi7.increaseKey(0, 10): heapi7 = " << heapi7 << endl;
+    heapf7.increaseKey(7, 2.9);                             // heapf7 = [9.4, 5.9, 7.5, 3.7, 1.8, 6.4, 4.9, 2.9]
+    cout << "- heapf7.increaseKey(8, 2.9): heapf7 = " << heapf7 << endl;
+
+    // ii. increaseKey with larger value at random node
+    cout << "ii. increaseKey with larger value at random node" << endl;
+    heapi7.increaseKey(2, 15);                              // heapi7 = [15, 9, 10, 6, 5]
+    cout << "- heapi7.increaseKey(3, 15): heapi7 = " << heapi7 << endl;
+
+    heapf7.increaseKey(4, 8.5);                             // heapf7 = [9.4, 8.5, 7.5, 3.7, 5.9, 6.4, 4.9, 2.9]
+    cout << "- heapf7.increaseKey(4, 8.5): heapf7 = " << heapf7 << endl << endl; 
 
 
+    //========================================================
+    // 11. Testing insert
+    cout << "**********************************************************" << endl;
+    cout << "11. Testing insert" << endl;
+
+    // a. Insert to an empty heap
+    cout << "a. Insert to an empty heap" << endl;
+    heapi4.insert(10);                                        // heapi4 = [10]
+    cout << "- heapi4.insert(10): heapi4 = " << heapi4 << endl;
+
+    heapf4.insert(12.3);                                      // heapf4 = [12.3]
+ 
+    // b. Insert to a nonempty heap
+    cout << "b. Insert to a nonempty heap" << endl;
+    heapi7.insert(3);                                         // heapi7 = [15, 9, 10, 6, 5, 3]
+    cout << "- heapi7.insert(3): heapi7 = " << heapi7 << endl;
+    heapi7.insert(11);                                        // heapi7 = [15, 9, 11, 6, 5, 3, 10]
+    cout << "- heapi7.insert(11): heapi7 = " << heapi7 << endl;
+    heapi7.insert(20);                                        // heapi7 = [20, 15, 11, 9, 5, 3, 10, 6]
+    cout << "- heapi7.insert(20): heapi7 = " << heapi7 << endl;
+
+    heapf7.insert(1.3);                                       // heapf7 = [9.4, 8.5, 7.5, 3.7, 5.9, 6.4, 4.9, 2.9, 1.3]
+    cout << "- heapf7.insert(1.3): heapf7 = " << heapf7 << endl;
+    heapf7.insert(8.6);                                       // heapf7 = [9.4, 8.6, 7.5, 3.7, 8.5, 6.4, 4.9, 2.9, 1.3, 5.9]
+    cout << "- heapf7.insert(8.6): heapf7 = " << heapf7 << endl;
+    heapf7.insert(10.3);                                      // heapf7 = [10.3, 9.4, 7.5, 3.7, 8.6, 6.4, 4.9, 2.9, 1.3, 5.9, 8.5]
+    cout << "- heapf7.insert(10.3): heapf7 = " << heapf7 << endl;
+
+    // c. Insert to a heap that is currently at capacity
+    cout << "c. Insert to a heap that is currently at capacity" << endl;
+    Heap<int> heapi9(3);
+    for (int i = 0; i < 3; i++)
+        heapi9.insert(i);                                     // heapi9 = [2, 0, 1]
+    heapi9.insert(5);                                         // heapi9 = [5, 2, 1, 0]
+    cout << "- heapi9.insert(5): heapi9 = " << heapi9 << endl;
+
+    Heap<float> heapf9(5);
+    for (int i = 5; i > 0; i--)
+        heapf9.insert(i + 0.1*(i + 1));                       // heapf9 = [5.6, 4.5, 3.4, 2.3, 1.2]
+    heapf9.insert(3.5);                                       // heapf9 = [5.6, 4.5, 3.5, 2.3, 1.2, 3.4]
+    cout << "- heapf9.insert(3.5): heapf9 = " << heapf9 << endl << endl;
+
+
+    //========================================================
+    // 12. Testing Length
+    cout << "**********************************************************" << endl;
+    cout << "12. Testing Length" << endl;
+
+    // a. Length of an empty heap
+    cout << "a. Length of an empty heap" << endl;
+    Heap<int> heapi10;                                          // heapi10 = [ ]
+    cout << "Length of heapi10 = " << heapi10.length() << endl;
+
+    Heap<float> heapf10;                                        // heapf10 = [ ]
+    cout << "Length of heapf10 = " << heapf10.length() << endl;
+
+    // b. Length of a nonempty array
+    cout << "Length of heapi9 = " << heapi9.length() << endl;   
+    cout << "Length of heapf9 = " << heapf9.length() << endl << endl;   
+
+
+    //========================================================
+    // 13. Testing Empty
+    cout << "**********************************************************" << endl;
+    cout << "13. Testing Empty" << endl;
+
+    // a. Testing emptiness of an empty heap
+    cout << "a. Testing emptiness of an empty heap" << endl;
+    cout << "- is heapi10 empty? " << (heapi10.empty()? "Yes" : "No") << endl;
+    cout << "- is heapf10 empty? " << (heapf10.empty()? "Yes" : "No") << endl;
+
+    // b. Testng emptiness of a nonempty heap
+    cout << "b. Testng emptiness of a nonempty heap" << endl;
+    cout << "- is heapi9 empty? " << (heapi9.empty() ? "Yes" : "No") << endl;
+    cout << "- is heapf9 empty? " << (heapf9.empty() ? "Yes" : "No") << endl << endl;
+
+
+    //========================================================
+    // 14. Testing Max
+    cout << "**********************************************************" << endl;
+    cout << "14. Testing Max" << endl;
+
+    // a. Max of an empty heap
+    try {
+        cout << "a. Max of an empty heap" << endl;
+        cout << heapi10.max() << endl;
+    } catch (const std::exception& e) {
+        cout << "- Max of heapi10: Exception caught (" << e.what() << ")" << endl;
+    }
+
+    try {
+        cout << heapf10.max() << endl;
+    } catch (const std::exception& e) {
+        cout << "- Max of heapf10: Exception caught (" << e.what() << ")" << endl;
+    }
+
+    // b. Max of a nonempty heap
+    cout << "b. Max of a nonempty heap" << endl;
+    cout << "- Max of heapi9: " << heapi9.max() << endl;        // heapi9 = [5, 2, 1, 0]
+    cout << "- Max of heapf9: " << heapf9.max() << endl << endl;// heapf9 = [5.6, 4.5, 3.5, 2.3, 1.2, 3.4]
+
+
+    //========================================================
+    // 15. Testing Extract
+    cout << "**********************************************************" << endl;
+    cout << "15. Testing Extract" << endl;
+
+    // a. Extract the max element of an empty heap
+    try {
+        cout << "a. Extract the max element of an empty heap" << endl;
+        cout << heapi10.extract() << endl;
+    } catch (const std::exception& e) {
+        cout << "- heapi10.extract(): Exception caught (" << e.what() << ")" << endl;
+    }
+
+    try {
+        cout << heapf10.extract() << endl;
+    } catch (const std::exception& e) {
+        cout << "- heapf10.extract(): Exception caught (" << e.what() << ")" << endl;
+    }
+
+    // b. Extract the max element of a nonempty heap
+    cout << "b. Extract the max element of a nonempty heap" << endl;
+    heapi10.insert(25);                                                 // heapi10 = [25]
+    cout << "- heapi10 before extract: heapi10 = " << heapi10 << endl;
+    cout << "- heapi10.extract(): max element = " << heapi10.extract() << ", heapi10 after extract = " << heapi10 << endl;
+
+    cout << "- heapi9 before extract: heapi9 = " << heapi9 << endl;     // heapi9 = [5, 2, 1, 0]
+    cout << "- heapi9.extract(): max element = " << heapi9.extract() << ", heapi9 after extract = " << heapi9 << endl;
+
+    heapf10.insert(42.9);                                               // heapf10 = [42.9]
+    cout << "- heapf10 before extract: heapf10 = " << heapf10 << endl;
+    cout << "- heapf10.extract(): max element = " << heapf10.extract() << ", heapf10 after extract = " << heapf10 << endl;
+
+    cout << "- heapf9 before extract: heapf9 = " << heapf9 << endl;     // heapf9 = [5.6, 4.5, 3.5, 2.3, 1.2, 3.4]
+    cout << "- heapf9.extract(): max element = " << heapf9.extract() << ", heapf9 after extract = " << heapf9 << endl;
+
+    cout << "*********************************************************************" << endl;
     return 0;
-
-
-   
-
 }
-
