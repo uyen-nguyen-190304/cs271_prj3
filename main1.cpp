@@ -1,3 +1,9 @@
+//==========================================================================================
+// * Author       : Yen Nguyen, Uyen Nguyen
+// * Purpose      : Test Driver for Heap Implementation
+// * Date Created : 2024-02-13
+// * Last Update  : 2024-02-22
+//==========================================================================================
 #include <iostream>
 #include <stdexcept>
 #include "Heap.h"
@@ -6,15 +12,15 @@ using namespace std;
 int main() {
     //========================================================
     // 1. Testing Default Constructor
-    cout << "**********************************************************" << endl;
+    cout << "*********************************************************************" << endl;
     cout << "1. Testing Default Constructor" << endl;
 
     // Create a new empty integer heap
-    Heap<int> heapi1;                        // heapi1 = [ ]
-    cout << "Int Heap: heapi1 = " << heapi1 << endl;
+    Heap<int> heapi1;                           // heapi1 = [ ]
+    cout << "- Heap<int> heapi1: heapi1 = " << heapi1 << endl;
 
-    Heap<float> heapf1;                      // heapf1 = [ ]
-    cout << "Float Heap: heapf1 = " << heapf1 << endl;
+    Heap<float> heapf1;                         // heapf1 = [ ]
+    cout << "- Heap<float> heapf1: heapf1 = " << heapf1 << endl;
 
 
     //========================================================
@@ -24,21 +30,21 @@ int main() {
     
     // a. Create a copy of an empty heap
     cout << "a. Create a copy of an empty heap" << endl;
-    Heap<int> heapi2(heapi1);         // heapi2 = heapi1 = [ ]
-    cout << "Int Heap: heapi2 = " << heapi2 << endl;
+    Heap<int> heapi2(heapi1);                   // heapi2 = heapi1 = [ ]
+    cout << "- Heap<int> heapi2(heapi1): heapi2 = " << heapi2 << endl;
 
-    Heap<float> heapf2(heapf1);       // heapf2 = heapf1 = [ ]
-    cout << "Float Heap: heapf2 = " << heapf2 << endl;
+    Heap<float> heapf2(heapf1);                 // heapf2 = heapf1 = [ ]
+    cout << "- Heap<float> heapf2(heapf1): heapf2 = " << heapf2 << endl;
 
     // b. Create a copy of a nonempty list
     cout << "b. Create a copy of a nonempty heap" << endl;
     for (int i = 10; i >= 1; i--) 
-        heapi1.insert(i);             // heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    Heap<int> heapi3(heapi1);         // heapi3 = heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-    cout << "Int Heap: heapi3 = " << heapi3 << endl;
+        heapi1.insert(i);                       // heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    Heap<int> heapi3(heapi1);                   // heapi3 = heapi1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    cout << "- Heap<int> heapi3(heapi1): heapi3 = " << heapi3 << endl;
     
     for (int i = 10; i >= 5; i--)
-        heapf1.insert(i + 0.1*(i-1)); // heapf1 = [10.9, 9.8, 8.7, 7.6, 6.5, 5.4]
+        heapf1.insert(i + 0.5);                 // heapf1 = [10.9, 9.8, 8.7, 7.6, 6.5, 5.4]
     Heap<float> heapf3(heapf1);       // heapf3 = heapf1 = [10.9, 9.8, 8.7, 7.6, 6.5, 5.4]
     cout << "Float Heap: heapf3 = " << heapf3 << endl;
     
@@ -99,16 +105,6 @@ int main() {
     } catch (...) {
         cout << "-5 is not a valid capacity for heap array." << endl;
     }
-
-    /*
-    try {
-        cout << "iii. Passing an array with its wrong size" << endl;
-        int a[5] = {1, 2, 3, 4, 5};
-        Heap<int> heapi5(a, 4);
-    } catch (...) {
-        cout << "Mismatch between length of array and arraySize" << endl;
-    }
-    */
 
     // b. Valid Parameter
     cout << "b. Valid Parameter Passing (a nonempty array with its size)" << endl;

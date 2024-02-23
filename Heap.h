@@ -2,7 +2,7 @@
 // * Author       : Yen Nguyen, Uyen Nguyen
 // * Purpose      : Implementing Max-Heap Data Structure using Dynamically Allocated Arrays
 // * Date Created : 2024-02-13
-// * Last Update  : 2024-02-20
+// * Last Update  : 2024-02-22
 //==========================================================================================
 #include <iostream>
 #include <algorithm>
