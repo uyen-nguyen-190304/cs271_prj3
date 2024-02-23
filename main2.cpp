@@ -124,8 +124,8 @@ int main() {
     {
         cout << "b. Testing destructor for float pqueue" << endl;
         PQueue<float> pqf5;
-    } // pqj5 should alreay be destructed here
-    cout << "- pqj5 no longer exists outside the block" << endl << endl;
+    } // pqf5 should alreay be destructed here
+    cout << "- pqf5 no longer exists outside the block" << endl << endl;
 
 
     //========================================================
@@ -201,7 +201,7 @@ int main() {
     cout << "- pqi5.enqueue(5): pqi5 = " << pqi5 << endl;
 
     pqf5.enqueue(2.8);                              // pqf5 = [54.3, 9.5, 3.1, 2.8, 1.9, 1.5, 0.2, -2.3, -3.4, -49.6]
-    cout << "- pqj5.enqueue(28): pqj5 = " << pqf5 << endl << endl;
+    cout << "- pqf5.enqueue(2.8): pqf5 = " << pqf5 << endl << endl;
 
 
     //========================================================

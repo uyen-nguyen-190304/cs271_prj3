@@ -90,7 +90,7 @@ int main() {
     }
 
     // b. Valid Parameter 
-    cout << "b. Valid Parameter Passing (a positive integer as capacity parameter" << endl;
+    cout << "b. Valid Parameter Passing (a positive integer as capacity parameter)" << endl;
     Heap<int> heapi4(10);                       // heapi4 = [ ]
     cout << "- Heap<int> heapi4(10): heapi4 = " << heapi4 << endl;
 
@@ -556,6 +556,7 @@ int main() {
     cout << "Length of heapf10 = " << heapf10.length() << endl;
 
     // b. Length of a nonempty array
+     cout << "b. Length of a nonempty heap" << endl;
     cout << "Length of heapi9 = " << heapi9.length() << endl;   
     cout << "Length of heapf9 = " << heapf9.length() << endl << endl;   
 
