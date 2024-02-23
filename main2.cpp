@@ -20,7 +20,7 @@ int main() {
     cout << "- PQueue<int> pqi1: pqi1 = " << pqi1 << endl;
 
     PQueue<float> pqf1;                          // pqf1 = [ ]
-    cout << "- PQueue<float> pqf1: pqf1 = " << pqf1 << endl;
+    cout << "- PQueue<float> pqf1: pqf1 = " << pqf1 << endl << endl;
 
 
     //========================================================
@@ -46,7 +46,7 @@ int main() {
     for (int i = 5; i > 0; i--)
         pqf1.enqueue(i + 0.1*i);                  // pqf1 = [5.5, 4.4, 3.3, 2.2, 1.1]
     PQueue<float> pqf3(pqf1);                     // pqf3 = pqf1 = [5.5, 4.4, 3.3, 2.2, 1.1]
-    cout << "- PQueue<float> pqf3(pqf1): " << pqf3 << endl;
+    cout << "- PQueue<float> pqf3(pqf1): " << pqf3 << endl << endl;
 
 
     //========================================================
@@ -89,13 +89,26 @@ int main() {
 
     // b. Valid Parameters
     cout << "b. Valid Parameter Passing" << endl;
+
+    // i. Passing an empty array with size 0
+    cout << "i. Passing an empty array with size 0" << endl;
+    int ai1[0] = {};
+    PQueue<int> pqi35(ai1, 0);                      // pqi35 = [ ]
+    cout << "- PQueue<int> pqi35(ai1, 0): pqi35 = " << pqi35 << endl;
+
+    float af1[0] = {};
+    PQueue<float> pqf35(af1, 0);                      // pqi35 = [ ]
+    cout << "- PQueue<float> pqf35(af1, 0): pqf35 = " << pqf35 << endl;
+
+    // ii. Passing a nonempty array
+    cout << "ii. Passing a nonempty array" << endl;
     int ai[5] = {6, 7, 8, 9, 10};
     PQueue<int> pqi4(ai, 5);                         // pqi4 = [10, 9, 8, 7, 6]
     cout << "- PQueue<int> pqi4(ai, 5): pqi4 = " << pqi4 << endl;
 
     float af[7] = {3.1, 9.5, -2.3, 1.5, -3.4, 0.2, 1.9};
     PQueue<float> pqf4(af, 7);                       // pqf4 = [9.5, 3.1, 1.9, 1.5, 0.2, -2.3, -3.4]
-    cout << "- PQueue<float> pqf4(af, 7): pqf4 = " << pqf4 << endl;
+    cout << "- PQueue<float> pqf4(af, 7): pqf4 = " << pqf4 << endl << endl;
 
 
     //========================================================
@@ -112,7 +125,7 @@ int main() {
         cout << "b. Testing destructor for float pqueue" << endl;
         PQueue<float> pqf5;
     } // pqj5 should alreay be destructed here
-    cout << "- pqj5 no longer exists outside the block" << endl;
+    cout << "- pqj5 no longer exists outside the block" << endl << endl;
 
 
     //========================================================
@@ -158,7 +171,7 @@ int main() {
     cout << "- pqi2 = pqi3 = pqi4: pqi2 = " << pqi2 << ", pqi3 = " << pqi3 << ", pqi4 = " << pqi4 << endl;
 
     pqf2 = pqf3 = pqf4;
-    cout << "- pqf2 = pqf3 = pqf4: pqf2 = " << pqf2 << ", pqf3 = " << pqf3 << ", pqf4 = " << pqf4 << endl;
+    cout << "- pqf2 = pqf3 = pqf4: pqf2 = " << pqf2 << ", pqf3 = " << pqf3 << ", pqf4 = " << pqf4 << endl << endl;
 
 
     //========================================================
@@ -188,7 +201,7 @@ int main() {
     cout << "- pqi5.enqueue(5): pqi5 = " << pqi5 << endl;
 
     pqf5.enqueue(2.8);                              // pqf5 = [54.3, 9.5, 3.1, 2.8, 1.9, 1.5, 0.2, -2.3, -3.4, -49.6]
-    cout << "- pqj5.enqueue(28): pqj5 = " << pqf5 << endl;
+    cout << "- pqj5.enqueue(28): pqj5 = " << pqf5 << endl << endl;
 
 
     //========================================================
@@ -205,7 +218,7 @@ int main() {
 
     // b. Length of a nonempty pqueue
     cout << "- pqi5.length() = " << pqi5.length() << endl;
-    cout << "- pqf5.length() = " << pqf5.length() << endl;
+    cout << "- pqf5.length() = " << pqf5.length() << endl << endl;
 
 
     //========================================================
@@ -221,7 +234,7 @@ int main() {
     // b. Testing emptiness of a nonempty pqueue
     cout << "b. Testing emptiness of a nonempty pqueue" << endl;
     cout << "- Is pqi5 empty? " << (pqi5.empty() ? "Yes" : "No") << endl;
-    cout << "- Is pqf5 empty? " << (pqf5.empty() ? "Yes" : "No") << endl;
+    cout << "- Is pqf5 empty? " << (pqf5.empty() ? "Yes" : "No") << endl << endl;
 
 
     //========================================================
@@ -249,7 +262,7 @@ int main() {
     cout << "- Peek of pqi5: " << pqi5.peek() << endl;
 
     cout << "- Peek of pqf4: " << pqf4.peek() << endl;
-    cout << "- Peek of pqf5: " << pqf5.peek() << endl;
+    cout << "- Peek of pqf5: " << pqf5.peek() << endl << endl;
 
 
     //========================================================
