@@ -5,7 +5,6 @@
 // * Last Update  : 2024-02-22
 //==========================================================================================
 #include <iostream>
-#include <algorithm>
 #include <stdexcept> 
 using namespace std;
 
@@ -135,7 +134,7 @@ template <class T>
 Heap<T>::Heap(int givenCapacity) {
     // Check if the given parameter is valid (givenCapacity > 0)
     if (givenCapacity <= 0) {
-        throw std::invalid_argument("Invalid capacity for heap array.");
+        throw std::invalid_argument("Invalid capacity for heap array");
     }
     
     // Set the capacity to given value
@@ -159,12 +158,19 @@ Heap<T>::Heap(int givenCapacity) {
 template <class T>
 Heap<T>::Heap(T a[], int arraySize) {
     // Validate the input array and size
-    if (a == nullptr || arraySize <= 0) {
-        throw std::invalid_argument("Invalid array or size.");
+    if (a == nullptr || arraySize < 0) {
+        throw std::invalid_argument("Invalid array or size");
     }
 
-    // Initialized the heap's capacity and size with the size of the provided array
-    capacity = size = arraySize;
+    // Initialized the heap's size with the size of the provided array
+    size = arraySize;
+
+    // Decide the capacity for the heap
+    if (arraySize < DEFAULT_HEAP_CAPACITY) {
+        capacity = DEFAULT_HEAP_CAPACITY;
+    } else {
+        capacity = static_cast<int>(arraySize * 1.5);
+    } 
 
     // Allocate memory for the heap with the specified capacity
     heap = new T[capacity];
@@ -237,8 +243,12 @@ Heap<T>& Heap<T>::operator=(const Heap& other) {
 //==========================================================================================
 template <class T>
 void Heap<T>::heapify(int index, int N ) {
+    // If the (sub)-heap is empty, heapify does nothing, so it will return and terminate the function
+    if (N == 0) {
+        return;
+    }
     // Validate input parameters to ensure they are within valid range 
-    if (index < 0 || N > size || index >= N) {
+    if (index < 0 || N < 0 || N > size || index >= N) {
         throw std::invalid_argument("Invalid index or N out of bounds.");
     }
 
@@ -396,7 +406,7 @@ template <class T>
 T Heap<T>::max(void) const {
     // Check if the heap is empty before retrieving the maximum element
     if (size == 0) {
-        throw std::out_of_range("Heap is empty.");
+        throw std::out_of_range("Heap is empty");
     }
 
     // Return the element at the root of the heap, which is the maximum element in a max-heap

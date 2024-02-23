@@ -6,7 +6,6 @@
 //==========================================================================================
 #include <iostream>
 #include <stdexcept>
-#include <string>
 #include "PQueue.h"
 using namespace std;
 
@@ -58,31 +57,30 @@ int main() {
     // a. Invalid Parameter
     cout << "a. Invalid Parameter Passing" << endl;
     try {
-        cout << "i. Passing empty int array for int pqueue" << endl;
-        int a[1];                                  // empty array: a = [ ]
-        PQueue<int> pqi4(a, 0);
+        cout << "i. Passing null pointer" << endl;
+        PQueue<int> pqi4(nullptr, 0);
+        cout << "- PQueue<int> pqi4(nullptr, 0): " << pqi4 << endl;
     } catch (const std::exception& e) {
-        cerr << "- PQueue<int> pqi4(a, 0): Exception caught (" << e.what() << ")" << endl;
+        cerr << "- PQueue<int> pqi4(nullptr, 0): Exception caught (" << e.what() << ")" << endl;
     }
 
     try {
-        cout << "ii. Passing empty float array for float pqueue" << endl;
-        float a[1];                                // empty array: a = [ ]
-        PQueue<float> pqf4(a, 0);
+        PQueue<float> pqf4(nullptr, 0);
+        cout << "- PQueue<float> pqf4(nullptr, 0): " << pqf4 << endl;
     } catch (const std::exception& e) {
-        cerr << "- PQueue<float> pqf4(a, 0): Exception caught (" << e.what() << ")" << endl;
+        cerr << "- PQueue<float> pqf4(nullptr, 0): Exception caught (" << e.what() << ")" << endl;
     }
 
     try {
-        cout << "iii. Passing invalid size parameter for int pqueue" << endl;
+        cout << "ii. Passing invalid size parameter" << endl;
         int a[5] = {1, 2, 3, 4, 5};
-        PQueue<int> pqi4(a, 0);
+        PQueue<int> pqi4(a, -7);
+
     } catch (const std::exception& e) {
-        cerr << "- PQueue<int> pqi4(a, 0): Exception caught (" << e.what() << ")" << endl;
+        cerr << "- PQueue<int> pqi4(a, -7): Exception caught (" << e.what() << ")" << endl;
     }
 
     try {
-        cout << "iv. Passing invalid size parameter for float pqueue" << endl;
         float a[5] = {1.5, 2.5, 3.5, 4.5, 5.5};
         PQueue<float> pqf4(a, -5);
     } catch (const std::exception& e) {
@@ -105,13 +103,13 @@ int main() {
     cout << "********************************************************" << endl;
     cout << "4. Testing Destructor" << endl;
     {
-        cout << "i. Testing destructor for int pqueue" << endl;
+        cout << "a. Testing destructor for int pqueue" << endl;
         PQueue<int> pqi5;
     } // pqi5 should already be destructed here
     cout << "- pqi5 no longer exists outside the block" << endl;
     
     {
-        cout << "ii. Testing destructor for float pqueue" << endl;
+        cout << "b. Testing destructor for float pqueue" << endl;
         PQueue<float> pqf5;
     } // pqj5 should alreay be destructed here
     cout << "- pqj5 no longer exists outside the block" << endl;
